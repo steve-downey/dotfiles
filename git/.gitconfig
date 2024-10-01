@@ -1,0 +1,44 @@
+[user]
+	email = sdowney@gmail.com
+	name = Steve Downey
+[push]
+	default = simple
+	recurseSubmodules = on-demand
+[rerere]
+	enabled = true
+[url "git://github.com/ghc/packages-"]
+	insteadOf = git://github.com/ghc/packages/
+[url "http://github.com/ghc/packages-"]
+	insteadOf = http://github.com/ghc/packages/
+[url "https://github.com/ghc/packages-"]
+	insteadOf = https://github.com/ghc/packages/
+[url "ssh://git@github.com/ghc/packages-"]
+	insteadOf = ssh://git@github.com/ghc/packages/
+[url "git@github.com:/ghc/packages-"]
+	insteadOf = git@github.com:/ghc/packages/
+[core]
+	excludesfile = /home/sdowney/.gitignore_global
+[url "git@github.com:ghc/packages-"]
+	insteadOf = git@github.com:ghc/packages/
+[credential]
+	helper = cache
+[alias]
+	pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
+[github]
+	user = steve-downey
+[url "ssh://git@github.com/steve-downey/"]
+	insteadOf = https://github.com/steve-downey/
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[init]
+	defaultBranch = main
+[merge]
+	ff = false
+[pull]
+	ff = true
+[diff]
+	submodule = log
+[status]
+	submoduleSummary = true
+[submodule]
+	recurse = true
