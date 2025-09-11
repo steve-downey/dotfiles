@@ -4,6 +4,7 @@
 [push]
 	default = simple
 	recurseSubmodules = on-demand
+	autoSetupRemote = true
 [rerere]
 	enabled = true
 [url "git://github.com/ghc/packages-"]

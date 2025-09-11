@@ -70,10 +70,16 @@ ZSH_THEME="sdowney"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git emacs gh git-prompt isodate pyenv python)
+plugins=(git gh git-prompt isodate python ssh-agent command-not-found kitty)
+
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/completions
 
 export PYTHON_AUTO_VRUN=true
 export PYTHON_VENV_NAME=".venv"
+
+zstyle :omz:plugins:ssh-agent agent-forwarding yes
+zstyle :omz:plugins:ssh-agent identities id_rsa id_ed25519 id_git id_panix id_octopus
 
 source $ZSH/oh-my-zsh.sh
 
@@ -84,40 +90,21 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
+# EDITOR
 export EDITOR='emacsclient -t'
 export VISUAL='emacsclient -c'
 export ALTERNATE_EDITOR=""
 
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
-
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
+# XDG GTK
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-~/tmp/xdg}"
 export NO_AT_BRIDGE=1 # DBUS warning message suppression
 export GDK_DPI_SCALING=1.25
 
-export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-~/tmp/xdg}"
-
+# GHC
 [ -f "/home/sdowney/.ghcup/env" ] && source "/home/sdowney/.ghcup/env" # ghcup-env
 
+# SSH Agent
 SSH_ENV="$HOME/.ssh/agent-environment"
 
 function start_agent {
@@ -141,19 +128,38 @@ else
     start_agent;
 fi
 
+# RUST
 . "$HOME/.cargo/env"
 
+# PYENV
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# GO installation
+export PATH=$PATH:/usr/local/go/bin:~/go/bin
+
+# VCPKG
+export VCPKG_ROOT=~/bld/vcpkg/vcpkg
+export PATH=$VCPKG_ROOT:$PATH
+
+# Last so these are first in PATH
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# set PATH so it includes user's private bin if it exists
+# set PATH so it includes user's private .local/bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+    source "$EAT_SHELL_INTEGRATION_DIR/zsh"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PIP_REQUIRE_VIRTUALENV=true
