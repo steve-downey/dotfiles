@@ -9657,3 +9657,848 @@ cd
 git fetch --all
 zsh
 bash --login
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*" 
+cd ..
+rm -rf exemplar.git/
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*" 
+cd ..
+cd exemplar.git/
+git remote add upstream git@github.com:beman-project/exemplar.git
+git checkout -b wusatosi-clang-format main
+git pull git@github.com:wusatosi/exemplar.git clang-format
+git worktree add main
+ls -ltra
+rm -rf main/
+git worktree remove main
+git worktree add ../main
+cd ../main/
+git checkout -b wusatosi-clang-format main
+git pull git@github.com:wusatosi/exemplar.git clang-format
+python3 -m venv .venv
+. .venv/bin/activate
+make wg21.bib
+rm wg21.bib 
+make wg21.bib
+grep p2900 wg21.bib 
+less wg21.bib 
+cd
+cd src/Optional26/
+rg removed **/*tex
+cd Optional26.git/
+git fetch --all --branches
+git fetch --all --tags
+git worktree add ../normalize
+scp *css sdowney@panix3.panix.com:~/public_html/css
+ls ~/.ssh/*
+ssh-add ~/.ssh/id_panix
+scp *css sdowney@panix3.panix.com:~/public_html/css
+sudo apt update && sudo apt -y full-upgrade && sudo apt -y dist-upgrade
+wget -O - https://apt.llvm.org/llvm.sh > llvm.sh
+ls -ltra
+./llvm.sh
+sudo ./llvm.sh
+sudo ./llvm.sh 18 all
+sudo ./llvm.sh 19 all
+sudo ./llvm.sh 20 all
+sudo apt remove python3-lldb-20
+sudo apt autoremove 
+sudo ./llvm.sh 19 all
+sudo apt remove libllvm19 
+sudo apt update 
+sudo apt update && sudo apt -y full-upgrade && sudo apt -y dist-upgrade
+cd ..
+ls
+cd emacs-30
+cd emacs/emacs-30/
+make clean
+time (make bootstrap -j16 &&  make install) 2>&1 | tee build.log
+cd 
+cd src/view_maybe
+ls
+cd view_maybe/
+git diff
+git fetch --all --tags
+emacs-30
+emacs-30
+emacs-30
+emacs-30
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*" 
+git config remote.upstream.fetch "+refs/heads/*:refs/remotes/upstream/*" 
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*" 
+git pull
+git branch --set-upstream-to=origin/install_sets 
+git checkout main 
+git worktree add ../install_sets
+cd ../install_sets/
+git pull
+sudo mount -t cifs  -o username=sdowney smb://nas1.local/video/ ~/synology
+ssh 'sdowney@nas1.local'
+cd .ssh/
+ls
+ssh -i ./id_nas1  'sdowney@nas1.local'
+cd
+ls
+cd tmp/
+ls
+rsync -avl nas1.local::/test_shared_folder/ test_shared_folder/
+rsync -avl sdowney@nas1.local::test_shared_folder/ test_shared_folder/
+cd
+cd Pictures/
+rsync -avl ./ sdowney@nas1.local::photos/sdowney_photos/Pictures/
+rsync -avl ./ sdowney@nas1.local::photos/sdowney_photos/Pictures/
+rsync -avl ~/Pictures/ sdowney@nas1.local::photos/sdowney_photos/
+rsync -avl ~/Pictures/ sdowney@nas1.local::photos/sdowney_photo/Pictures/
+rsync -avl ~/Pictures/ sdowney@nas1.local::photo/sdowney_photo/Pictures/
+rsync -avl /home/sdowney/SlideTransfers/ sdowney@nas1.local::photo/sdowney_photo/SlideTransfers/
+cd
+rm -rf SlideTransfers/
+ls
+df .
+cd Downloads/
+ls -ltra
+ls -ltraS
+rm GX010175.MP4 
+rm GX020175.MP4 
+df .
+cd
+du -sk * | sort -n
+emacs-30 --init-dir=~/src/exordium/ --debug-init
+emacs-30 --init-dir=~/src/exordium/master/ --debug-init
+emacs-30 --init-dir=~/src/exordium/master/ --debug-init
+emacs --init-dir=~/src/exordium/master/ --debug-init
+emacs --init-dir=~/src/exordium/master/ --debug-init
+emacs --init-dir=~/src/exordium/master/ --debug-init
+rsync -avl /home/sdowney/SlideTransfers/ sdowney@nas1.local::photo/sdowney_photo/SlideTransfers/
+rsync -avl /home/sdowney/Videos/ sdowney@nas1.local::video/
+ls
+rsync -avl /home/sdowney/Music/ sdowney@nas1.local::music/sdowney_music/
+du -sk * | sort -n
+rsync -avl /home/sdowney/Okinawan\ Goju\ Ryu\ Volume\ 3/ sdowney@nas1.local::homes/sdowney/rips/
+rsync -avl /home/sdowney/Okinawan\ Goju\ Ryu\ Volume\ 3/ sdowney@nas1.local::home/rips/
+rsync -avl /home/sdowney/Okinawan\ Goju\ Ryu\ Volume\ 3/ sdowney@nas1.local::home/rips/Okinawan\ Goju\ Ryu\ Volume\ 3/
+rsync -avl /home/sdowney/oyo2/ sdowney@nas1.local::home/rips/oyo2/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::home/rips/convert/
+../cmake/bootstrap --prefix=~/install/cmake-release/ --parallel=16
+make -j 16
+make install
+cd ~/install/
+ls
+stow  -t ~/.local/  -R emacs-30/
+stow  -t ~/.local/  -R cmake-release/
+stow  -t ~/.local/  -R gcc-trunk/
+xstow  -t ~/.local/  gcc-trunk
+stow  -t ~/.local/  -R cmake-release/ -v
+ls cmake-release/
+ls cmake-release/share/
+rm -rf cmake-release/
+cd ~/src/kitware/cmake-build/
+make install
+cd ~/install/
+stow  -t ~/.local/  -R cmake-release/ -v
+which cmake
+cmake --version
+isoinfo --debug -d -i /dev/sr0
+isoinfo --debug -d -i /dev/sr0
+cd /media/sdowney/Caer.Wydyr/
+ls
+cd iso/
+ls
+handbrake-gtk 
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 DCMP_1012.iso DCMP_1012.map
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 DCMP_1012.iso DCMP_1012.map
+isoinfo --debug -d -i /dev/sr0
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 DCMP_1014.iso DCMP_1014.map
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 DCMP_1014.iso DCMP_1014.map
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 DCMP_1014.iso DCMP_1014.map
+fc-cache  -f -v
+sudo apt install freerdp
+sudo apt install freerdp3-x11 
+xfreerdp ~/Downloads/launch\ \(3\).rdp 
+xfreerdp 
+bash
+bash -l
+cowsay Hello, Nix! | lolcat
+cowsay Hello, Nix! 
+cowsay Hello, Nix! | lolcat
+zsh
+which git
+ls -ltra .ssh/
+ls -ltrad  .ssh/
+rsync -avl .ssh/ /media/sdowney/Samsung\ USB/.ssh/
+rsync src/dotfiles/ /media/sdowney/Samsung\ USB/dotfiles
+rsync src/dotfiles/ /media/sdowney/Samsung\ USB/dotfiles/
+ls /media/sdowney/Samsung\ USB/dotfiles/
+cd src/
+cd dotfiles/
+ls
+ls -tlra
+rsync -avl ./ /media/sdowney/Samsung\ USB/dotfiles/
+cd ..
+ls
+cd ..
+rsync -avl ~/src/ /media/sdowney/Samsung\ USB/src/
+ls -tlra ~/.ssh/
+cd src/secretaire
+cat .git/config 
+cd
+ls -ltrad .ssh/
+cd .ssh/
+ls -ltrad *
+ssh -v -v git@github.com
+echo ddrescue -r 3 -b 2048 -v -d  /dev/sr0 GOJU_RYU_VOLUME_2.iso GOJU_RYU_VOLUME_2.map
+echo ddrescue -r 3 -b 2048 -v -d  /dev/sr0 GOJU_RYU_VOLUME_2.iso GOJU_RYU_VOLUME_2.map > ddrescue.sh
+rm *iso *.map *map.bak
+ls
+rm VIDEO_TS.m4v 
+cd ..
+df .
+cd convert/
+ls
+rm *m4v
+rm *mpg
+ls
+rm *iso
+ls
+rm *mp4
+ls
+rm *map *vob
+ls
+rm DCMP_1013.map.bak 
+cd ..
+ls
+df .
+du -sk * | sort -n
+cd steve-downey/
+ls
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; pushd $DIR; git fetch --all --tags && git merge --ff-only ; popd; done
+bash ./mirror.sh 
+bash ./mirror.sh 
+gh login
+gh auth
+gh auth refresh
+bash ./mirror.sh 
+bash ./mirror.sh 
+bash ./mirror.sh 
+wget -O - https://apt.llvm.org/llvm.sh > llvm.sh
+ls -ltra
+./llvm.sh
+sudo llvm.sh 20 all
+sudo ./llvm.sh 20 all
+sudo ./llvm.sh 21 all
+cd
+cd bld/
+cd emacs
+cd emacs-30/
+git fetch --all --tags && git merge --ff-only
+cd ../build-30/
+time (make bootstrap -j16 &&  make install) 2>&1 | tee build.log
+cd ..
+cd emacs-30/
+find . -name '*.C'
+isoinfo --debug -d -i /dev/sr0
+mount
+vlc
+isoinfo --debug -d -i /dev/sr0
+cat ddrescue.sh 
+ddrescue -r 3 -b 2048 -v -d /dev/sr0 Goju_Tech_5.iso Goju_Tech_5.map
+handbrake-gtk ./Goju_Tech_5.iso 
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-20/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_ENABLE_RUNTIMES="all"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -G Ninja  ../release-20.x/
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-20/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_ENABLE_RUNTIMES="all"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -G Ninja  ../release-20.x/llvm
+cmake --build .
+ls -ltra
+cmake --build . --target install
+/home/sdowney/install/llvm-20/bin/clang-doc 
+/home/sdowney/install/llvm-20/bin/clang-doc  --he;[
+cd
+cd src/Optional26/
+ls
+cd move_fix/
+/home/sdowney/install/llvm-20/bin/clang-doc  --help
+/home/sdowney/install/llvm-20/bin/clang-doc  -p compile_commands.json include/beman/optional/optional.hpp 
+ls -ltr
+ls -ltra docs/
+/home/sdowney/install/llvm-20/bin/clang-doc  --help
+/home/sdowney/install/llvm-20/bin/clang-doc --format=html -p compile_commands.json include/beman/optional/optional.hpp 
+ls docs/
+sensible-browser docs/index.html 
+/home/sdowney/install/llvm-20/bin/clang-doc  --help
+/home/sdowney/install/llvm-20/bin/clang-doc --format=html --source-root=include/ --project-name="Bema Optional" --output=docs -p compile_commands.json include/beman/optional/optional.hpp 
+/home/sdowney/install/llvm-20/bin/clang-doc --format=html --source-root=include/ --project-name="Beman Optional" --output=docs -p compile_commands.json include/beman/optional/optional.hpp 
+/home/sdowney/install/llvm-20/bin/clang-doc --format=html --source-root=include/beman/optional/ --project-name="Beman Optional" --output=docs -p compile_commands.json include/beman/optional/optional.hpp 
+/home/sdowney/install/llvm-20/bin/clang-doc --format=html --source-root=include/beman/optional/ --project-name="Beman Optional" --output=docs -p compile_commands.json 
+/home/sdowney/install/llvm-20/bin/clang-doc --format=html --source-root=include/beman/optional/ --project-name="Beman Optional" --output=docs -p compile_commands.json include/beman/optional/optional.hpp 
+ls docs/
+cd docs/
+cd ..
+/home/sdowney/install/llvm-20/bin/clang-doc --format=html --source-root=include/beman/optional/ --project-name="Beman Optional" --output=clang-doc -p compile_commands.json include/beman/optional/optional.hpp 
+cd clang-doc/
+ls
+ls -lR
+ls beman/optional/optional
+ls beman/optional/optional.html 
+sensible-browser  beman/optional/optional.html 
+sudo apt update && sudo apt -y full-upgrade && sudo apt -y dist-upgrade
+cd ..
+rm -rf clang-doc/
+/home/sdowney/install/llvm-20/bin/clang-doc --format=md --source-root=include/beman/optional/ --project-name="Beman Optional" --output=clang-doc -p compile_commands.json include/beman/optional/optional.hpp 
+cd clang-doc/
+ls
+less beman/optional/optional.md 
+cd ..
+make -k TOOLCHAIN=gcc-14 CONFIG=Gcov  VERBOSE=1 coverage
+make -k TOOLCHAIN=gcc-14 CONFIG=Gcov  VERBOSE=1 coverage
+find . -name '*.cfg'
+find .build/ -name '*.html'
+sensible-browser .build/build-gcc-14/coverage/coverage.html
+make -k TOOLCHAIN=gcc-14 CONFIG=Gcov  VERBOSE=1 lint
+make -k TOOLCHAIN=gcc-14 CONFIG=Gcov  VERBOSE=1 lint
+git diff
+make -k TOOLCHAIN=gcc-14 CONFIG=Gcov  VERBOSE=1 lint-manual
+git diff
+ls
+cd papers/P2988/
+ls
+TEXTCMDS=tcode,term,grammarterm,techterm,defnx,defn,Fundescx,Fundesc,state,leftshift,EnterBlock,ExitBlock,NTS,EXPO,impdefx,UNSP,xname,mname,diffdef,stage,doccite,cvqual,numconst,logop
+SAFECMDS=Rplus,Cpp,CppIII,opt,shl,shr,dcr,exor,bigoh,tilde,bitand,bitor,xor,rightshift,enternote,enterexample,exitexample,required,requires,effects,postconditions,postcondition,preconditions,precondition,returns,throws,default,complexity,remark,remarks,note,notes,realnote,realnotes,errors,sync,implimits,replaceable,exceptionsafety,returntype,cvalue,ctype,ctypes,dtype,ctemplate,templalias,xref,xsee,ntbs,ntmbs,ntwcs,ntcxvis,ntcxxxiis,expos,impdef,notdef,unspec,unspecbool,seebelow,unspecuniqtype,unspecalloctype,unun,change,rationale,effect,difficulty,howwide,uniquens,cv
+latexdiff --append-textcmd=$TEXTCMDS --append-safecmd=$SAFECMDS -c PICTUREENV='(?:picture|DIFnomarkup|codeblock)[\w\d*@]*' base.tex new.tex  
+latexdiff --append-textcmd=$TEXTCMDS --append-safecmd=$SAFECMDS -c PICTUREENV='(?:picture|DIFnomarkup|codeblock)[\w\d*@]*' base.tex new.tex  > diff.tex
+make diff.pdf
+make diff.pdf
+make diff.pdf
+sensible-browser diff.pdf 
+ls -ltra *pdf
+sensible-browser optional_ref_wording.pdf 
+diff base-optional.tex head-optional.tex 
+make papers 
+diff -u base-optional.tex new-optional.tex 
+diff -u base-optional.tex new-optional.tex | less
+sudo apt install pdf-diff
+sudo apt install pdfdiff
+cp optional_ref_wording.pdf d2988r10.pdf
+make papers 
+make papers 
+cp optional_ref_wording.pdf d2988r10.pdf
+make papers 
+make -k
+make -k new-optional.tex 
+make -k new-optional.pdf
+make -k new.pdf
+ls
+ls -ltra
+rm optional_ref_wording.log optional_ref_wording.out
+make -k new.pdf
+make clean
+make -k new.pdf
+make -k papers
+ln -s p2988.pdf ./optional_ref_wording.pdf 
+ln -s ./optional_ref_wording.pdf  p2988.pdf
+make -k papers
+make -k clean
+make -k papers
+make -k papers
+make -k clean
+make -k papers
+isoinfo --debug -d -i /dev/sr0
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 DCMP_1011.iso DCMP_1011.map
+ddrescue -r 30 -b 2048 -v -d  /dev/sr0 DCMP_1011.iso DCMP_1011.map
+sudo apt install transcode
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 DCMP_1011.iso DCMP_1011.map
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 DCMP_1011.iso DCMP_1011.map
+ls -ltra
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::home/rips/convert/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::home/rips/convert/
+isoinfo --debug -d -i /dev/sr0
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 SPD_1834.iso SPD_1834.map
+handbrake --help
+handbrake -z
+handbrake -p
+handbrake -p "My DVD Convert"
+ls -ltra
+sudo apt install handbrake-cli 
+handbrake --help
+handbrake --help-al;
+handbrake --help-all
+handbrake-gtk --help
+man handbrake
+dpkg -s handbrake-cli
+HandBrakeCLI --help
+HandBrakeCLI --title 0 --input ./SPD_1834.iso 
+HandBrakeCLI --title 0 --input ./DCMP_1011.iso 
+isoinfo --debug -d -i /dev/sr0
+ddrescue -r 3 -b 2048 -v -d  /dev/sr0 DVD_YUV_on_148.iso DVD_YUV_on_148.map
+ls -ltra
+HandBrakeCLI 
+HandBrakeCLI --help
+HandBrakeCLI -z
+handbrake
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::home/rips/convert/
+sudo apt update && sudo apt -y full-upgrade && sudo apt -y dist-upgrade
+ls
+ls -ltra
+ssh nas1
+cd .ssh/
+ls
+ssh -o ./id_nas1 nas1
+ssh -i ./id_nas1 nas1
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-20/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_ENABLE_RUNTIMES="all"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on -G Ninja  ../release-20.x/llvm
+ninja stage2
+ninja clean
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-20/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_ENABLE_RUNTIMES="all"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE" \ -G Ninja  ../release-20.x/llvm
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-20/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_ENABLE_RUNTIMES="all"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE"  -G Ninja  ../release-20.x/llvm
+ninja clean
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-20/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_ENABLE_RUNTIMES="all"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE"  -G Ninja  ../release-20.x/llvm
+ninja stage2
+ls -ltra
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::home/rips/convert/
+cd ..
+ls -ltra
+rsync -avl /home/sdowney/oyo2/ sdowney@nas1.local::home/rips/oyo2/
+rsync -avl /home/sdowney/iso/ sdowney@nas1.local::home/rips/iso/
+ninja install
+banner
+codespell
+sudo apt install codespell
+codespell -h
+add-apt-repository
+add-apt-repository --help
+gzcat ~/Downloads/Packages.gz | less
+zcat ~/Downloads/Packages.gz | less
+gunzip ~/Downloads/Packages.gz 
+ls
+ls -ltra
+less Downloads/Packages 
+gunzip ~/Downloads/Packages.gz 
+less Downloads/Packages 
+grep gcc-15  Downloads/Packages 
+sudo apt install doxygen
+cd src/
+cd Optional26/doxygen/
+cd docs/
+mkdir doxygen
+cd doxygen/
+doxygen -g
+git add Doxyfile 
+git commit -m 'Generated Doxyfile'
+ls ../../include/
+ls ../../include/beman/optional/
+doxygen --help
+doxygen -V
+doxygen -v
+doxygen -V
+doxygen 
+ls -ltra
+cd html/
+ls
+sensible-browser index.html 
+cd ..
+cd ..
+doxygen 
+cd doxygen/
+doxygen 
+cd ..
+cd ..
+cd ..
+cd utility_cast/
+ls
+cd include/
+cd beman/optional/
+clang-format-20 -i --help
+clang-format-20 -i --style=file optional.hpp 
+cd
+cd src/
+ls -tlra
+cd cplusplus/draft
+git status
+git fetch --all --tags && git merge --ff-only
+git push origin 
+git clean -dfx
+acroread
+pdfinfo
+cd ..
+pdfinfo *pdf
+for f in *.pdf; do     if ! pdfinfo "$f" &> /dev/null; then         echo "$f" is broken;     fi; done
+ls -ltra *pdf
+make papers
+make all
+ls *tex
+make base.pdf 
+for f in *.pdf; do     if ! pdftotext "$f" &> /dev/null; then         echo "$f" is broken;     fi; done
+qpdf
+sudo apt install qpdf
+qpdf --check optional_ref_wording.pdf
+qpdf --check ~/Downloads/p2988r9.pdf
+cd
+sudo apt update && sudo apt -y full-upgrade && sudo apt -y dist-upgrade
+sudo apt update && sudo apt -y full-upgrade && sudo apt -y dist-upgrade
+fd
+sudo apt install fdclone
+fd
+sudo apt remove fdclone 
+git fetch --all --tags && git merge --ff-only
+export TEXTCMDS=tcode,term,grammarterm,techterm,defnx,defn,Fundescx,Fundesc,state,leftshift,EnterBlock,ExitBlock,NTS,EXPO,impdefx,UNSP,xname,mname,diffdef,stage,doccite,cvqual,numconst,logop
+SAFECMDS=Rplus,Cpp,CppIII,opt,shl,shr,dcr,exor,bigoh,tilde,bitand,bitor,xor,rightshift,enternote,enterexample,exitexample,required,requires,effects,postconditions,postcondition,preconditions,precondition,returns,throws,default,complexity,remark,remarks,note,notes,realnote,realnotes,errors,sync,implimits,replaceable,exceptionsafety,returntype,cvalue,ctype,ctypes,dtype,ctemplate,templalias,xref,xsee,ntbs,ntmbs,ntwcs,ntcxvis,ntcxxxiis,expos,impdef,notdef,unspec,unspecbool,seebelow,unspecuniqtype,unspecalloctype,unun,change,rationale,effect,difficulty,howwide,uniquens,cv
+git latexdiff --no-cleanup --flatten  --main new.tex  --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock' -o diff.pdf 917cce5e008263a04aa66db6a5bc1e6d45688f30 --
+git latexdiff --help
+git latexdiff --no-cleanup --flatten  --main new.tex  --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock' -o diff.pdf --ignore-makefile 917cce5e008263a04aa66db6a5bc1e6d45688f30 --
+cat latexmkrc 
+man git-latexdiff
+git latexdiff --no-cleanup --flatten  --main new.tex  --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock' -o diff.pdf --ignore-makefile --latexopt '--shell-escape' --latexmk 917cce5e008263a04aa66db6a5bc1e6d45688f30 --
+less new.log 
+ls /tmp/git-latexdiff.822114/
+ls -lR /tmp/git-latexdiff.822114/
+cat Makefile 
+git latexdiff --no-cleanup --flatten  --main new.tex  --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock' -o diff.pdf --ignore-makefile --latexopt '-f -shell-escape -pdflua' --latexmk 917cce5e008263a04aa66db6a5bc1e6d45688f30 --
+sensible-browser diff.pdf 
+git tags -l
+git tag -l
+git fetch --all --tags
+git tag -l
+gitk .
+bg
+git tag
+git tag -?
+git tag -a -m 'P2988R9' P2988R9 1babfd9019b2630c0980dc1e19a9e9796a07eb3d
+git latexdiff --no-cleanup --flatten  --main new.tex  --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock' -o diff.pdf --ignore-makefile --latexopt '-f -shell-escape -pdflua' --latexmk P2988R9 --
+pushd /tmp/git-latexdiff.825088/new/papers/P2988
+ls
+less new.log 
+latexmk -f -shell-escape -pdflua new.tex
+latexmk --help
+latexmk -c -f -shell-escape -pdflua new.tex
+latexmk -f -shell-escape -pdflua new.tex
+rg -l '\rowhdr{\tcode{rhs} contains a value}'
+rg -l '\rowhdr{\\tcode{rhs} contains a value}'
+rg -l 'contains a value}'
+rg  'contains a value}'
+less -N new.tex
+popd
+git tag -a -m 'P2988R10' P2988R10 232c8180ecf2e044c5e1ea4d010a033b2deeb59c
+git latexdiff --no-cleanup --flatten  --main new.tex  --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock' -o diff.pdf --ignore-makefile --latexopt '-f -shell-escape -pdflua' --latexmk P2988R10 --
+sensible-browser diff.pdf 
+latexdiff --no-cleanup --flatten   --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock' -o diff.pdf --ignore-makefile --latexopt '-f -shell-escape -pdflua' --latexmk P2988R10 base.tex new.tex
+latexdiff --flatten   --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock' base.tex new.tex
+latexdiff --flatten   --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock' base.tex new.tex > base-new-diff.tex
+make base-new-diff.pdf
+latexdiff --flatten   --append-textcmd=${TEXTCMDS} --append-safecmd=${SAFECMDS}  --add-to-config='ARRENV=itemdecl;codeblock;lib2dtab2' base.tex new.tex > base-new-diff.tex
+make base-new-diff.pdf
+sensible-browser base-new-diff.pdf 
+sudo apt update && sudo apt -y full-upgrade && sudo apt -y dist-upgrade
+cd
+cd Downloads/
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb.1
+rm google-chrome-stable_current_amd64.deb*
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb 
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then ($DIR; git fetch --all --tags && git merge --ff-only ;) fi; done
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin; git fetch --all --tags && git merge --ff-only ;) fi; print "\n\n" ; done
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin; git fetch --all --tags && git merge --ff-only ;) fi; echo "\n\n" ; done
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin; git fetch --all --tags && git merge --ff-only ;) fi; println "" ; done
+print ""
+print 
+print -n
+which print
+print -?
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin; git fetch --all --tags && git merge --ff-only ;) fi; printf "\n\n" ; done
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin --pull; git fetch --tags origin && git merge --ff-only ;) fi; printf "\n\n" ; done
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin ; git fetch --tags origin && git merge --ff-only ;) fi; printf "\n\n" ; done
+g++-13 --static-quadmath
+g++-13 --static-libquadmath
+g++-13 -static-libquadmath
+g++-12 -static-libquadmath
+cd secretaire
+git push
+git fetch --all --tags && git merge --ff-only
+git fetch --all --tags && git merge --ff-only
+git merge --ff-only github/main 
+git push --all
+cd ..
+cd cppnow25/
+ls
+cd main/
+git fetch --all --tags && git merge --ff-only
+git fetch -v 
+cat ../cppnow25.git/config 
+git fetch github 
+git merge --ff-only github/main 
+rm streams/streams.html 
+git merge --ff-only github/main 
+git push origin 
+git fetch origin 
+git fetch --all --tags && git merge --ff-only
+sudo apt update && sudo apt -y full-upgrade 
+cd 
+cd src/secretaire
+ls
+git fetch --all --tags && git merge --ff-only
+emacs-30
+;s
+ls
+cd streams/
+cd code/
+ls
+git subtree pull --prefix vendor/stdexec --squash git@github.com:NVIDIA/stdexec.git main
+cd ..
+cd ..
+git subtree pull --prefix streams/code/vendor/stdexec --squash git@github.com:NVIDIA/stdexec.git main
+git subtree add --prefix streams/code/vendor/stdexec --squash git@github.com:NVIDIA/stdexec.git main
+git log
+git push origin 
+git push --set-upstream origin vendor
+git push --set-upstream github vendor
+cd ../churchsender/
+git subtree pull --prefix streams/code/vendor/execution --squash git@github.com:bemanproject/execution.git main
+git stash
+git subtree pull --prefix streams/code/vendor/execution --squash git@github.com:bemanproject/execution.git main
+git status
+git subtree add --prefix streams/code/vendor/execution --squash git@github.com:bemanproject/task.git main
+git subtree add --prefix streams/code/vendor/task --squash git@github.com:bemanproject/task.git main
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin ; git fetch --tags origin && git merge --ff-only ;) fi; printf "\n\n" ; done
+cd src/
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin ; git fetch --tags origin && git merge --ff-only ;) fi; printf "\n\n" ; done
+ls
+mkdir nullable
+cd nullable/
+isoinfo 
+mount
+isoinfo /dev/sr0 
+isoinfo -i /dev/sr0 
+isdump -i /dev/sr0 
+isodump -i /dev/sr0 
+less ~/.bash_history 
+isoinfo --debug -d -i /dev/sr0
+df .
+SAFECMDS=Rplus,Cpp,CppIII,opt,shl,shr,dcr,exor,bigoh,tilde,bitand,bitor,xor,rightshift,enternote,enterexample,exitexample,required,requires,effects,postconditions,postcondition,preconditions,precondition,returns,throws,default,complexity,remark,remarks,note,notes,realnote,realnotes,errors,sync,implimits,replaceable,exceptionsafety,returntype,cvalue,ctype,ctypes,dtype,ctemplate,templalias,xref,xsee,ntbs,ntmbs,ntwcs,ntcxvis,ntcxxxiis,expos,impdef,notdef,unspec,unspecbool,seebelow,unspecuniqtype,unspecalloctype,unun,change,rationale,effect,difficulty,howwide,uniquens,cv
+TEXTCMDS=tcode,term,grammarterm,techterm,defnx,defn,Fundescx,Fundesc,state,leftshift,EnterBlock,ExitBlock,NTS,EXPO,impdefx,UNSP,xname,mname,diffdef,stage,doccite,cvqual,numconst,logop
+cd ..
+lls
+ls
+cd source/
+ls
+make
+sudo mount -t cifs  -o username=sdowney smb://nas1.local/video/ ~/synology
+ls ~/synology/
+sudo mount -t cifs -o username=sdowney,uid=sdowney,gid=sdowney //192.168.1.175/video ~/synology/
+ls /var/run/user/1000/gvfs/
+ls /var/run/user/1000/gvfs/smb-share\:server\=nas1.local\,share\=video\,user\=sdowney/
+mkdir /var/run/user/1000/gvfs/smb-share\:server\=nas1.local\,share\=video\,user\=sdowney/convert/
+rsync -avl ./convert/ /var/run/user/1000/gvfs/smb-share\:server\=nas1.local\,share\=video\,user\=sdowney/convert/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::videos/convert/convert/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::video/convert/convert/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::video/convert/convert/
+ssh sdowney@nas1.local
+ssh -i ./id_nas1  'sdowney@nas1.local'
+cd
+cd .ssh/
+ssh -i ./id_nas1  'sdowney@nas1.local'
+rsync --help
+cp -R ./convert/ /var/run/user/1000/gvfs/smb-share\:server\=nas1.local\,share\=video\,user\=sdowney/convert/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::video/convert/convert/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::video/convert/convert/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::video/convert/convert/
+ls -ltra ~/iso/
+cd
+cd convert/
+;s
+ls
+cd VPM191/
+ls
+ls -ltra
+df .
+ls -ltra
+cd ..
+ls -ltra
+rm Spd_1834.m4v 
+df . 
+cd
+ls -ltra
+cd iso/
+ls -ltra
+cd ..
+ls -ltra
+du -sk * | sort -n
+cd convert/
+ls -ltra
+ls DCMP_1011
+rm Dcmp\ 1011*
+ls -ltra
+df . 
+rm Goju_Tech_5.m4v 
+rm DVD_YUV_on_148.m4v 
+df .
+rsync -avl /home/sdowney/iso/ sdowney@nas1.local::home/rips/iso/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::video/convert/convert/
+ls -ltra
+cd convert/
+ls -ltra
+rsync -avl  sdowney@nas1.local::video/convert/convert/ /media/sdowney/video/convert/ 
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::home/rips/convert/
+handbrake
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::home/rips/convert/
+cd convert/
+cp /media/sdowney/video/karate.xspf .
+vlc karate.xspf 
+vlc /media/sdowney/video/karate.xspf 
+vlc karate.xspf 
+vlc karate.xspf 
+vlc
+df .
+rm -rf ~/oyo2/*
+rm -rf ~/iso/*
+df .
+isoinfo --debug -d -i /dev/sr0
+mkdir goju_tech_6
+cd goju_tech_6/
+mplayer dvd:// -identify
+isoinfo --debug -d -i /dev/sr0
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::home/rips/convert/
+ipa
+apt install ipa
+rsync -avl sdowney@nas1.local::home/rips/convert/ /media/sdowney/VIDEO/
+rsync -avl sdowney@nas1.local::home/rips/convert/ /media/sdowney/video/
+rsync -avl --progress -H sdowney@nas1.local::home/rips/convert/ /media/sdowney/video/
+rsync /home/sdowney/convert/ /media/sdowney/video/
+rsync -avl /home/sdowney/convert/ /media/sdowney/video/
+rsync -avl --progress -H  sdowney@nas1.local::video/convert/convert/ /media/sdowney/video/
+rsync -avl /home/sdowney/convert/ sdowney@nas1.local::home/rips/convert/
+du -sk *
+rm VPM191/
+rm -rf VPM191/
+du -sk * | sort -n
+rm -rf SPD_183*
+rm -rf goju_tech_*
+df .
+cd 
+cd steve-downey/
+ls
+cat mirror.sh 
+cp mirror.sh ../mirror-steve-downey.sh
+cd ..
+rm -rf steve-downey/
+df .
+docker system prune --volumes -af
+df .
+cd ~/bld/
+du -sk * | sort -n
+cd llvm
+ls
+ls -ltra
+rm -rf llvm-19/
+rm -rf release-20.x/
+cd ..
+cd gcc
+ls -ltra
+ls
+du -sk *
+cd ..
+ls
+cd ~/install/
+du -sk * | sort -n
+stow  -t ~/.local/  -D emacs-29-pgtk/
+stow -t ~/.local/ -D git-2.43.0/
+stow -t ~/.local/ -R git-2.45.2/
+which git
+ls -ltra
+stow -t ~/.local/ -v -D gcc-trunk/
+ls ~/.local/bin/
+ls -l ~/.local/bin/
+chkstow 
+chkstow --target ~/.local/ --list
+chkstow --target ~/.local/bin --list
+chkstow --target ~/.local/bin --aliens
+chkstow --target ~/.local/bin --badlinks
+stow --target ~/.local/ -R gcc-15
+stow --target ~/.local/ -R gcc-16
+stow -t ~/.local/ -v -D gcc-*
+stow -t ~/.local/ -v -D gcc-15
+stow -t ~/.local/ -v -D gcc-16/
+rm -rf gcc-*
+cd
+cd bld/
+cd gcc
+cd build-15/
+make install
+cd
+cd deb-src
+mkdir deb-src
+cd deb-src/
+mkdir gcc-15
+cd gcc-15/
+apt-get source gcc-15
+cd gcc-15-15-20250404/
+time make -f debian/rules build -j 16 2>&1 | tee build.log
+ls -ltra
+rm -rf *
+cd ,,
+cd ..
+rm -rf gcc-15-15-20250404/
+apt-get source gcc-15
+cd gcc-15-15-20250404/
+time make -f debian/rules build  2>&1 | tee build.log
+cd ..
+cd ..
+mkdir gcc-14
+cd gcc-14/
+apt source gcc-14
+cd gcc-14-14.2.0/
+make -f debian/rules build 2>&1 | tee build.log
+sudo apt-get build-dep -y gcc-14
+sudo apt install build-essential 
+make -f debian/rules clean 
+time make -f debian/rules build  2>&1 | tee build.log
+make -f debian/rules clean 
+time make -f debian/rules build  -j 16 2>&1 | tee build.log
+grep configure build.log 
+grep 'configure ' build.log 
+rg 'configure ' build.log  
+grep 'configure ' build.log   | less
+grep infodir build.log 
+grep infodir build.log  | less
+time make -f debian/rules binary  -j 16 2>&1 | tee binary.log
+time fakeroot  make -f debian/rules binary  -j 16 2>&1 | tee binary.log
+find . -name 'Makefile' | xargs grep  gccinstall Makefile 
+rg INFO_GCCINSTALL_NAME
+rg GCCINSTALL
+rg INFO_GCCINSTALL
+cd ..
+rg INFO_GCCINSTALL
+grep GCCINSTALL *
+cd gcc-14-14.2.0/
+cd build
+make realclean
+cd ..
+./debian/rules clean
+cd ../
+cd ../
+cd gcc-15/
+ls
+cd gcc-15-15-20250404/
+./debian/rules -j 8 build 2>&1 | tee build.log
+cd ..
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin ; git fetch --tags origin && git merge --ff-only ;) fi; printf "\n\n" ; done
+cd ..
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin ; git fetch --tags origin && git merge --ff-only ;) fi; printf "\n\n" ; done
+cd cplusplus/draft
+ls
+git checkout -
+git checkout main 
+for F in $(rg -l github.com:steve-downey **/*/.git/config); do DIR=${F%.git/config}; if [ -d $DIR ] ; then (echo $DIR; cd $DIR; git remote get-url origin ; git fetch --tags origin && git merge --ff-only ;) fi; printf "\n\n" ; done
+git fetch --all
+git merge --ff-only 
+git merge --ff-only upstream/main
+git push origin 
+cd
+wget -O - https://apt.llvm.org/llvm.sh > llvm.sh
+./llvm.sh
+sudp ./llvm.sh
+sudo  ./llvm.sh
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-22/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_C_COMPILER=clang-21  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_ENABLE_RUNTIMES="all"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on -DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE"  -G Ninja  ../main/llvm
+rm -rf *
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-22/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_C_COMPILER=clang-21  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_ENABLE_RUNTIMES="all"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on -DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE"  -G Ninja  ../main/llvm
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-22/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_C_COMPILER=clang-21  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lld;compiler-rt;mlir;flang" -DLLVM_ENABLE_RUNTIMES="all"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on -DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE"  -G Ninja  ../main/llvm
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-22/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_C_COMPILER=clang-21  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lld;mlir;flang" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;compiler-rt"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on -DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE"  -G Ninja  ../main/llvm
+rm -rf *
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-22/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_C_COMPILER=clang-21  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lld;mlir;flang" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;compiler-rt"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on -DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE"  -G Ninja  ../main/llvm
+ninja 
+cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-22/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_C_COMPILER=clang-21  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lld;mlir;flang" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;compiler-rt;libunwind"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on -DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE"  -G Ninja  ../main/llvm
+ninja 
