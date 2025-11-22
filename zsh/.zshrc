@@ -1,6 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+setopt no_auto_remove_slash
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -79,7 +81,7 @@ export PYTHON_AUTO_VRUN=true
 export PYTHON_VENV_NAME=".venv"
 
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
-zstyle :omz:plugins:ssh-agent identities id_rsa id_ed25519 id_git id_panix id_octopus
+zstyle :omz:plugins:ssh-agent identities id_rsa id_ed25519 id_git id_panix id_octopus id_nas1
 
 source $ZSH/oh-my-zsh.sh
 
