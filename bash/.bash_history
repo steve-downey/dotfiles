@@ -10502,3 +10502,241 @@ cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-22/   -DCMAKE_BUILD_TYPE=Release -DL
 ninja 
 cmake -DCMAKE_INSTALL_PREFIX=~/install/llvm-22/   -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=Off  -DLLVM_PARALLEL_COMPILE_JOBS=12 -DLLVM_PARALLEL_LINK_JOBS=1 -DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_C_COMPILER=clang-21  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lld;mlir;flang" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;compiler-rt;libunwind"  -DLLVM_BUILD_BENCHMARKS=Off -DLLVM_INCLUDE_BENCHMARKS=On  -DLLVM_ENABLE_BINDINGS=Off -DBENCHMARK_DOWNLOAD_DEPENDENCIES=On -DCMAKE_BUILD_TYPE=Release -DCLANG_ENABLE_BOOTSTRAP=on -DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE"  -G Ninja  ../main/llvm
 ninja 
+ls !("mnt"*)
+ls -d !("mnt"*)
+du -sk !("mnt"*) | sort -n
+sudo apt update && sudo apt -y full-upgrade 
+sudo apt autoremove 
+do-release-upgrade --hwlp
+do-release-upgrade --help
+do-release-upgrade -c
+sudo do-release-upgrade 
+sudo do-release-upgrade -m desktop
+sudo do-release-upgrade -d
+make prefix=/home/sdowney/install/git-2.45.2/ install
+cd ..
+cd ..
+ls
+ls -ltra
+cd kitware
+ls
+cd build-release/
+ls
+ninja 
+ninja install
+sudo apt install nvidia-driver-580-open
+which g++-15 
+which g++-16 
+du -sk !("mnt"*) | sort -n
+cd convert/
+ls
+ls -trla
+rm OKINAWAN\ GOJU-RYU\ VOLUME\ 4.m4v 
+ls DCMP_101*
+cp DCMP_1011/My_DVD_Convert.json .
+env  | grep NIX
+grep NIX .pr*
+grep NIX .bas*
+sh -l
+less .profile 
+cd .cargo/
+ls
+less env 
+ls -ltra /nix/
+ls -ltra /nix/var/
+ls -ltra /nix/var/log/
+ls -ltra /nix/var/log/nix/
+ls -ltra /nix/var/log/nix/drvs/
+env | grep nix
+bash -xv /etc/profile
+less /etc/profile.d/nix.sh
+less /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+apt-file search /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+dpkg -S /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+dpkg -S  /etc/profile.d/nix.sh
+sudo systemctl stop nix-daemon.service
+sudo systemctl disable nix-daemon.socket nix-daemon.service
+sudo systemctl daemon-reload
+sudo rm -rf /etc/nix /etc/profile.d/nix.sh /etc/tmpfiles.d/nix-daemon.conf /nix ~root/.nix-channels ~root/.nix-defexpr ~root/.nix-profile ~root/.cache/nix
+for i in $(seq 1 32); do   sudo userdel nixbld$i; done
+sudo groupdel nixbld
+grep nix /etc/*
+sudo nano /etc/zshrc 
+make prefix=/home/sdowney/install/git-2.52.0 check
+make -j 16  prefix=/home/sdowney/install/git-2.52.0 check
+make -j 16  prefix=/home/sdowney/install/git-2.52.0 sparse
+make -j 16  prefix=/home/sdowney/install/git-2.52.0 test
+make -j 16  prefix=/home/sdowney/install/git-2.52.0 install
+cd contrib/
+ls
+cd subtree/
+make -j 16  prefix=/home/sdowney/install/git-2.52.0 install
+cd ..
+ls */Make*
+cd diff-highlight/
+make -j 16  prefix=/home/sdowney/install/git-2.52.0 install
+less Makefile 
+cd
+cd install/
+ls
+stow -t ~/.local/ -v -D git-2.45.2/
+stow -t ~/.local/ -v -D git-2.52.0/
+stow -t ~/.local/ -v -R git-2.52.0/
+cd
+cd tmp/
+cd test
+git subtree add --prefix infra --squash bemanproject-infra main
+git subtree add --prefix infra --squash bemanproject-infra main --debug
+git subtree add --prefix vendor/infra --squash bemanproject-infra main --debug
+ls -ltra
+ls -ltra vendor/
+git subtree add --prefix infra/infra --squash bemanproject-infra main --debug
+ls -ltra infra/
+cd ~/src/Optional26/infra/
+ls
+./scripts/install-infra.sh 
+git status
+./scripts/install-infra.sh 
+./scripts/update-infra.sh 
+./scripts/update-infra.sh 
+./scripts/update-infra.sh 
+git subtree pull --prefix=infra bemanproject-infra main --squash
+git subtree pull --prefix=infra/infra bemanproject-infra main --squash
+git subtree add --prefix=infra/infra bemanproject-infra main --squash
+git subtree
+gitk
+bg
+git subtree add --prefix=infra/infra bemanproject-infra main --squash
+git subtree pull --prefix=infra/infra bemanproject-infra main --squash
+git subtree add --prefix=infra/infra bemanproject-infra main --squash
+mkdir infra
+git reset -hard
+git reset --hard
+mkdir infra
+ls -tlra
+ls infra/
+ls -tlra
+rm -rf infra/
+make
+mkdir infra
+git subtree add --prefix=infra bemanproject-infra main --squash
+mkdir subtree
+git subtree add --prefix=subtree/infra bemanproject-infra main --squash
+ls subtree/
+git subtree pull --prefix=subtree/infra bemanproject-infra main --squash
+git subtree pull --prefix=subtree/infra/ bemanproject-infra main --squash
+git subtree add  --prefix=subtree/infra/ bemanproject-infra main --squash
+git subtree add  --prefix=subtree/infra/ bemanproject-infra main --squash
+ls subtree/
+git reset --hard
+mkdir infra
+ls infra/
+rm -rf infra/
+ls -ltra
+git reset --hard
+cd
+cd tmp/
+cd test
+ls -ltra
+cd ..
+rm -rf test
+git init test
+cd test
+ls
+touch README
+git add README 
+git commit -am init
+git subtree add 
+mkdir subtree
+cd subtree/
+git subtree add --prefix subtree/infra git@github.com:bemanproject/infra.git main --squash
+cd ..
+git subtree add --prefix subtree/infra git@github.com:bemanproject/infra.git main --squash
+ls subtree/
+cd ..
+rm -rf test
+git init test
+cd test
+touch README ; git add README ; git commit -am 'init'
+mkdir subtree
+cd subtree/
+touch update.sh
+git add update.sh && git commit -am 'script'
+cd ..
+git subtree add --prefix subtree/infra git@github.com:bemanproject/infra.git main --squash
+ls subtree/
+cd ..
+rm -rf test
+git init test
+cd test
+touch README ; git add README ; git commit -am 'init'
+mkdir subtree
+cd subtree/
+git add update.sh && git commit -am 'script'
+toush update.sh && git add update.sh && git commit -am 'script'
+touch update.sh && git add update.sh && git commit -am 'script'
+cd ..
+git subtree add --prefix subtree/infra/infra git@github.com:bemanproject/infra.git main --squash
+git subtree pull --prefix subtree/infra/infra git@github.com:bemanproject/infra.git main --squash
+git subtree pull --prefix subtree/infra git@github.com:bemanproject/infra.git main --squash
+cd ..
+rm -rf test
+git init test
+cd test
+touch README ; git add README ; git commit -am 'init'
+git subtree pull --prefix subtree/beman.infra git@github.com:bemanproject/infra.git main --squash
+git subtree add  --prefix subtree/beman.infra git@github.com:bemanproject/infra.git main --squash
+cd subtree/
+ls -ltra
+cd ..
+git subtree pull  --prefix subtree/beman.infra git@github.com:bemanproject/infra.git main --squash
+git subtree pull  --prefix subtree git@github.com:bemanproject/infra.git main --squash
+cd .git
+ls -ltra
+rg -uu beman
+rg -uu subtree
+rg -uuu subtree
+cd .
+cd ..
+ls
+ls subtree/
+rm -rf subtree/
+git commit -am 'del'
+git subtree add  --prefix beman.infra git@github.com:bemanproject/infra.git main --squash
+git subtree add  --prefix beman.infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+git subtree add  --prefix=beman.infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+git subtree add  --prefix=./beman.infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+mkdir  beman.infra
+git subtree add  --prefix=./beman.infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+git subtree add  --prefix=beman.infra --debug  git@github.com:bemanproject/infra.git main --squash
+git subtree add  --prefix=beman.infra/infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+ls beman.infra/
+git subtree pull  --prefix=beman.infra/infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+git subtree pull  --prefix=beman.infra --debug  git@github.com:bemanproject/infra.git main --squash
+git subtree pull  --prefix=beman.infra --debug  git@github.com:bemanproject/infra.git main
+git subtree 
+git subtree pull  --prefix=beman.infra --debug  git@github.com:bemanproject/infra.git main
+git subtree pull  --prefix=beman.infra/infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+git subtree add  --prefix=beman.infra/infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+dirname beman.infra/infra/.
+which dirname
+dirname 'beman.infra/infra/.'
+dirname 'beman.infra/infra/x'
+dirname 'beman.infra/infra/.'
+sudo apt-get remove coreutils-from-uutils --allow-remove-essential
+dirname 'beman.infra/infra/.'
+cd ..
+rm -rf test
+git init test
+cd test
+touch README ; git add README ; git commit -am 'init'
+git subtree add  --prefix=infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+git subtree pull  --prefix=infra/ --debug  git@github.com:bemanproject/infra.git main --squash
+cd
+cd src/Optional26/
+ls
+cd infra/
+ls
+cd ..
+rm -rf infra/
+cd main/
