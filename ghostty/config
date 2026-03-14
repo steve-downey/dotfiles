@@ -1,7 +1,7 @@
-font-family = ""
+font-family = "Inconsolata"
 font-family = "Source Code Pro"
 font-family = "Noto Sans Mono"
-font-size = 10
+font-size = 12
 
 shell-integration = detect
 shell-integration-features =

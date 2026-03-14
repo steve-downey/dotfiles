@@ -143,7 +143,7 @@ eval "$(pyenv virtualenv-init -)"
 export PATH=$PATH:/usr/local/go/bin:~/go/bin
 
 # VCPKG
-export VCPKG_ROOT=~/bld/vcpkg/vcpkg
+export VCPKG_ROOT=~/bld/vcpkg/master
 export PATH=$VCPKG_ROOT:$PATH
 
 # Last so these are first in PATH
