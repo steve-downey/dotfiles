@@ -104,7 +104,7 @@ export NO_AT_BRIDGE=1 # DBUS warning message suppression
 export GDK_DPI_SCALING=1.25
 
 # GHC
-[ -f "/home/sdowney/.ghcup/env" ] && source "/home/sdowney/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # SSH Agent
 SSH_ENV="$HOME/.ssh/agent-environment"
@@ -165,3 +165,6 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PIP_REQUIRE_VIRTUALENV=true
+
+# Bloomberg/Spaces-specific functions — only loaded when present
+[[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/bloomberg.zsh" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/bloomberg.zsh"
