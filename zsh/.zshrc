@@ -97,6 +97,9 @@ export EDITOR='emacsclient -t'
 export VISUAL='emacsclient -c'
 export ALTERNATE_EDITOR=""
 
+# PROXIES
+[ -f ~/.proxyrc ] && source ~/.proxyrc
+
 # XDG GTK
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-~/tmp/xdg}"
