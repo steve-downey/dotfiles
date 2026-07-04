@@ -72,13 +72,14 @@ ZSH_THEME="sdowney"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gh git-prompt isodate python ssh-agent command-not-found kitty)
+plugins=(git gh git-prompt isodate ssh-agent command-not-found kitty)
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/completions
 
-export PYTHON_AUTO_VRUN=true
-export PYTHON_VENV_NAME=".venv"
+# Virtualenv auto-activation is handled solely by pyenv-virtualenv's precmd hook
+# (see `pyenv virtualenv-init -` below); the omz `python` plugin's auto_vrun was
+# buggy and fought pyenv over $PATH, so it's intentionally not loaded.
 
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent identities id_rsa id_ed25519 id_git id_panix id_octopus id_nas1
@@ -165,3 +166,5 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PIP_REQUIRE_VIRTUALENV=true
+
+export FJ_FALLBACK_HOST=http://ceridwen.lan:3000
