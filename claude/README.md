@@ -1,0 +1,29 @@
+# claude — portable Claude Code configuration
+
+Stow module mirroring `$HOME`: stows as `~/.claude/CLAUDE.md` and
+`~/.claude/skills`. `~/.claude` itself must remain a real directory —
+it holds machine-local state (sessions, cache, daemon, settings.json,
+per-project memory) that deliberately stays out of this repo.
+
+Contents:
+
+- `.claude/CLAUDE.md` — user-global instructions, loaded every session
+  in every project.
+- `.claude/skills/` — user-invocable skills. The whole directory is
+  stow-folded, so skills added on any machine land in the repo working
+  tree; `git add` to keep them.
+- `.claude/skills/voice` is a *relative* symlink four levels up to
+  `~/src/voice/main` — the skill lives in its own repo
+  (`github.com:steve-downey/voice`). Clone that repo to
+  `~/src/voice/main` on each machine; until then the link dangles,
+  harmlessly.
+
+Integration on a new machine: if `~/.claude/CLAUDE.md` or
+`~/.claude/skills` already exist there, merge anything worth keeping
+into this module first, remove the originals, then `stow claude` (or
+run `install.sh`, which auto-discovers it).
+
+Not included, on purpose: `settings.json` (machine/permission
+config), `.claude.json`, `projects/` (auto-memory is keyed to absolute
+project paths and is a machine-local cache; durable knowledge belongs
+in repo-committed CLAUDE.md/skills).
