@@ -72,13 +72,10 @@ ZSH_THEME="sdowney"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gh git-prompt isodate python ssh-agent command-not-found kitty)
+plugins=(git gh git-prompt isodate ssh-agent command-not-found kitty)
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/completions
-
-export PYTHON_AUTO_VRUN=true
-export PYTHON_VENV_NAME=".venv"
 
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent identities id_rsa id_ed25519 id_git id_panix id_octopus id_nas1
@@ -171,3 +168,17 @@ export PIP_REQUIRE_VIRTUALENV=true
 
 # Bloomberg/Spaces-specific functions — only loaded when present
 [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/bloomberg.zsh" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/bloomberg.zsh"
+
+# Function to auto-activate/deactivate python virtual environments
+_auto_venv_switch() {
+    if [[ -d .venv ]]; then
+        if [[ "$VIRTUAL_ENV" != "$PWD/.venv" ]]; then
+            [[ -n "$VIRTUAL_ENV" ]] && deactivate 2>/dev/null
+            source .venv/bin/activate
+        fi
+    elif [[ -n "$VIRTUAL_ENV" ]]; then
+        deactivate
+    fi
+}
+autoload -U add-zsh-hook
+add-zsh-hook chpwd _auto_venv_switch
