@@ -51,6 +51,42 @@ but the number is never the identity. Carry both (`### Stage 3 —
 numbers shift the moment a stage splits or an amendment inserts one, and
 nothing goes back to fix the references that shifted.
 
+## Git remote names
+
+A remote is named either for its **role** in a fork relationship or for **where
+it is**. Both schemes coexist in one repo: a role name says what the remote is
+*for*, a location name says what host it lives on.
+
+**By role:**
+
+- `origin` — the main fork. This is where work gets pushed.
+- `upstream` — the source the fork was taken from, and where pull requests go.
+  A draft PR may go to `origin` first, before public review.
+- `all` — a push alias covering several remotes at once. It does not coexist
+  well with the habit of `git fetch --all --tags`, which will try to fetch from
+  it too; that is the known cost of using it.
+
+**By location** — one name per host, for mirrors and extra push targets:
+
+| Name | Host |
+|---|---|
+| `github` | GitHub — `git@github.com:steve-downey/…` |
+| `bbgithub` | the Bloomberg GitHub Enterprise instance |
+| `mimir` | the homelab gitea instance — `mimir.lan` |
+| `ceridwen` | the portable NAS, running forgejo — `ceridwen.lan:22222` |
+
+This is the convention to follow for new remotes, not a claim about every
+existing repo — some predate it and disagree. Do not go renaming remotes in
+repos you were not asked to touch; a remote name is in someone's muscle memory
+and in scripts.
+
+**A repo mirrored to more than one host needs every mirror configured as a
+remote, or they drift silently.** A push updates only the remotes this clone
+knows about, and a clone that knows one of two mirrors will happily report
+itself in sync while the other falls behind — with no error anywhere, because
+nothing is wrong locally. Check with `git remote -v` before assuming a push
+reached everywhere it should.
+
 ## WG21 papers and public writing
 
 - **Paper files are named by name, not number**: `papers/algorithms-for-trees.md`,
