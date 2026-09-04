@@ -1,2 +1,7 @@
 # tmux plugins are managed by tpm, not by this repo
 tmux/.tmux/plugins/
+
+# Shell history is machine-local and append-only: it conflicts on every
+# cross-machine merge and has no business being synced.
+bash/.bash_history
+zsh/.zsh_history
