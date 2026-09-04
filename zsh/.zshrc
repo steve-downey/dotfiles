@@ -98,6 +98,9 @@ export EDITOR='emacsclient -t'
 export VISUAL='emacsclient -c'
 export ALTERNATE_EDITOR=""
 
+# PROXIES
+[ -f ~/.proxyrc ] && source ~/.proxyrc
+
 # XDG GTK
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-~/tmp/xdg}"
@@ -105,7 +108,7 @@ export NO_AT_BRIDGE=1 # DBUS warning message suppression
 export GDK_DPI_SCALING=1.25
 
 # GHC
-[ -f "/home/sdowney/.ghcup/env" ] && source "/home/sdowney/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # SSH Agent is managed by the oh-my-zsh ssh-agent plugin (see the zstyle
 # agent-forwarding/identities config above, applied when oh-my-zsh.sh is
@@ -147,7 +150,10 @@ export NVM_DIR="$HOME/.config/nvm"
 
 export PIP_REQUIRE_VIRTUALENV=true
 
+# Bloomberg/Spaces-specific functions — only loaded when present
+[[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/bloomberg.zsh" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/bloomberg.zsh"
+
 export FJ_FALLBACK_HOST=http://ceridwen.lan:3000
 
 # opencode
-export PATH=/home/sdowney/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"
