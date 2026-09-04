@@ -12,11 +12,17 @@ Contents:
 - `.claude/skills/` — user-invocable skills. The whole directory is
   stow-folded, so skills added on any machine land in the repo working
   tree; `git add` to keep them.
-- `.claude/skills/voice` is a *relative* symlink four levels up to
-  `~/src/voice/main` — the skill lives in its own repo
-  (`github.com:steve-downey/voice`). Clone that repo to
-  `~/src/voice/main` on each machine; until then the link dangles,
-  harmlessly.
+- Each skill in `.claude/skills/` is a *relative* symlink written for the
+  **stowed** location, i.e. relative to `~/.claude/skills/`, so the form is
+  `../../src/<name>/main`. Each skill lives in its own repo; clone it to
+  `~/src/<name>/main` on each machine, and until then the link dangles,
+  harmlessly. Currently: `voice`
+  (`github.com:steve-downey/voice`), `cpp-house-style`, `plan-fanout`.
+
+  These were previously written as `../../../../<name>/main`, which resolves
+  to `/` + `<name>/main` from the stowed location and to
+  `~/src/ceridwen/<name>/main` from inside this tree — dangling in both.
+  Corrected 2026-09-04.
 
 Integration on a new machine: if `~/.claude/CLAUDE.md` or
 `~/.claude/skills` already exist there, merge anything worth keeping
