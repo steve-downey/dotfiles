@@ -148,3 +148,6 @@ export NVM_DIR="$HOME/.config/nvm"
 export PIP_REQUIRE_VIRTUALENV=true
 
 export FJ_FALLBACK_HOST=http://ceridwen.lan:3000
+
+# opencode
+export PATH=/home/sdowney/.opencode/bin:$PATH

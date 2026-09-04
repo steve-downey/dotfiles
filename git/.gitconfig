@@ -50,3 +50,6 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !/usr/bin/gh auth git-credential
+[credential "http://ceridwen.lan:3000"]
+	helper = 
+	helper = !tea login helper
