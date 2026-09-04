@@ -54,38 +54,49 @@ nothing goes back to fix the references that shifted.
 ## Git remote names
 
 A remote is named either for its **role** in a fork relationship or for **where
-it is**. Both schemes coexist in one repo: a role name says what the remote is
-*for*, a location name says what host it lives on.
+it is**. Both schemes coexist in one repo. A role name says what the remote is
+*for* and **implies nothing about the host** — `origin` may point at any of the
+forges below.
 
-**By role:**
+**By role.** These are not local convention. `origin` and `upstream` are *well
+known* — magit assumes them, and so does an unbounded number of scripts — which
+is what makes them load-bearing, and why they are never repurposed to mean
+something else in one repo:
 
 - `origin` — the main fork. This is where work gets pushed.
 - `upstream` — the source the fork was taken from, and where pull requests go.
   A draft PR may go to `origin` first, before public review.
-- `all` — a push alias covering several remotes at once. It does not coexist
-  well with the habit of `git fetch --all --tags`, which will try to fetch from
-  it too; that is the known cost of using it.
+- `all` — a push alias covering several remotes at once. Nothing knows this one
+  by convention, and it does not coexist well with the habit of `git fetch
+  --all --tags`, which will try to fetch from it too. That is the standing cost
+  of using it.
 
 **By location** — one name per host, for mirrors and extra push targets:
 
 | Name | Host |
 |---|---|
-| `github` | GitHub — `git@github.com:steve-downey/…` |
-| `bbgithub` | the Bloomberg GitHub Enterprise instance |
+| `github` | GitHub — `github.com` |
+| `bbgithub` | the Bloomberg GitHub Enterprise instance — **work machines only** |
 | `mimir` | the homelab gitea instance — `mimir.lan` |
 | `ceridwen` | the portable NAS, running forgejo — `ceridwen.lan:22222` |
 
-This is the convention to follow for new remotes, not a claim about every
-existing repo — some predate it and disagree. Do not go renaming remotes in
-repos you were not asked to touch; a remote name is in someone's muscle memory
-and in scripts.
+**No `bbgithub` URL appears in this file, and none should.** This repo is shared
+to personal and work machines alike, so it carries the *name* and nothing more.
+A `bbgithub` remote belongs only on a Bloomberg machine; its absence on a
+personal one is correct, not a gap to fill, and a personal repo has no reason to
+gain one.
+
+This is the convention for new remotes, not a claim about every existing repo —
+some predate it and disagree. Do not rename remotes in a repo you were not asked
+to touch: beyond muscle memory, `origin` and `upstream` are exactly the names
+other tools resolve without being told.
 
 **A repo mirrored to more than one host needs every mirror configured as a
 remote, or they drift silently.** A push updates only the remotes this clone
-knows about, and a clone that knows one of two mirrors will happily report
-itself in sync while the other falls behind — with no error anywhere, because
-nothing is wrong locally. Check with `git remote -v` before assuming a push
-reached everywhere it should.
+knows about, and a clone that knows one of two mirrors will report itself in
+sync while the other falls behind — with no error anywhere, because nothing is
+wrong locally. Check `git remote -v` before assuming a push reached everywhere
+it should.
 
 ## WG21 papers and public writing
 
