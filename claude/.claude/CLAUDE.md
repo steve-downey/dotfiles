@@ -98,6 +98,15 @@ sync while the other falls behind — with no error anywhere, because nothing is
 wrong locally. Check `git remote -v` before assuming a push reached everywhere
 it should.
 
+**Mirrors converge; they do not specialize.** The rule is eventual consistency
+with no deliberate divergence. Transient divergence is fine: a fix specific to
+Forgejo or gitea tried out on a branch pushed only to that forge, or a remote
+that cannot be reached right now. Divergence that lasts is not: the result
+merges to `main` and goes to every remote, and the branch that existed on one
+host only is deleted. Host-specific content, such as `.forgejo/workflows/`,
+goes everywhere too; a forge that has no use for it ignores it. A remote left
+behind for lack of connectivity is reported as behind, not counted as done.
+
 ## WG21 papers and public writing
 
 - **Paper files are named by name, not number**: `papers/algorithms-for-trees.md`,
