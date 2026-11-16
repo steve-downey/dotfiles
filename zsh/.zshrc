@@ -157,3 +157,16 @@ export FJ_FALLBACK_HOST=http://ceridwen.lan:3000
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
+
+# Per-machine identity: ~/.config/zsh/host is untracked (one line, e.g.
+# "baguette") and is not synced by stow — it's created once per machine.
+# It selects a tracked, machine-specific config file below, keyed by that
+# name, for things (like which distrobox this host expects) that differ
+# per physical/virtual machine rather than per dotfiles checkout.
+if [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/host" ]]; then
+    export DOTFILES_HOST="$(<"${XDG_CONFIG_HOME:-$HOME/.config}/zsh/host")"
+    [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/hosts/${DOTFILES_HOST}.zsh" ]] && \
+        source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/hosts/${DOTFILES_HOST}.zsh"
+fi
+
+export BROWSER="$HOME/.local/bin/xdg-open"

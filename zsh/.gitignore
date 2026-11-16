@@ -1,0 +1,5 @@
+# Per-machine runtime/cache state — never meant to be synced across
+# machines by stow, so it doesn't belong in this package.
+.zcompdump
+.zcompdump-*
+.zsh_history
