@@ -77,9 +77,10 @@ plugins=(git gh git-prompt isodate ssh-agent command-not-found kitty)
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/completions
 
-# Virtualenv auto-activation is handled solely by pyenv-virtualenv's precmd hook
-# (see `pyenv virtualenv-init -` below); the omz `python` plugin's auto_vrun was
-# buggy and fought pyenv over $PATH, so it's intentionally not loaded.
+# The omz `python` plugin's auto_vrun was buggy and fought pyenv over $PATH, so
+# it's intentionally not loaded. pyenv-virtualenv activates only pyenv-managed
+# envs named in .python-version; plain project .venv dirs are handled by the
+# _venv_auto chpwd hook below (after the PYENV section).
 
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent identities id_rsa id_ed25519 id_git id_panix id_octopus id_nas1
@@ -122,6 +123,30 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# Project .venv: on cd, activate the nearest enclosing .venv; on leaving that
+# project's tree, deactivate it. Only a venv this hook activated is ever
+# deactivated by it; one you activated by hand is left alone, and an active
+# venv is never replaced. Paths are compared resolved (:A) so symlinked
+# checkouts don't flap.
+_venv_auto() {
+  local dir=$PWD venv=
+  while :; do
+    if [[ -f $dir/.venv/bin/activate ]]; then venv=${dir:A}/.venv; break; fi
+    [[ $dir == / ]] && break
+    dir=${dir:h}
+  done
+  if [[ -n $_VENV_AUTO && ${VIRTUAL_ENV:A} == $_VENV_AUTO && $venv != $_VENV_AUTO ]]; then
+    (( $+functions[deactivate] )) && deactivate
+    unset _VENV_AUTO
+  fi
+  if [[ -n $venv && -z $VIRTUAL_ENV ]]; then
+    source $venv/bin/activate && typeset -g _VENV_AUTO=${VIRTUAL_ENV:A}
+  fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd _venv_auto
+_venv_auto
 
 # GO installation
 export PATH=$PATH:/usr/local/go/bin:~/go/bin
