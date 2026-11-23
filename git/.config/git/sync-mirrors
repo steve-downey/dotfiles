@@ -1,34 +1,48 @@
 #!/usr/bin/env bash
-# git sync-mirrors [-n] [--prune] [BRANCH]
+# git sync-mirrors [-n] [--prune] [--no-publish] [BRANCH]
 #
-# Bring every reachable mirror of this repo up to the newest BRANCH (default
-# main), fast-forward only.  Mirrors are all remotes except `upstream` (the
-# source of a fork, not a copy of it) and push aliases (a remote with more than
-# one push URL, such as `all`).  An unreachable mirror is
-# skipped and reported as possibly behind; it is not counted as synced.
+# Bring every reachable mirror of this repo up to the newest BRANCH,
+# fast-forward only.  An unreachable mirror is skipped and reported as
+# possibly behind; it is not counted as synced.
+#
+# Mirrors are the remotes named for a mirror role or host: origin, github,
+# mimir, ceridwen, bbgithub.  A repo can set its own list with
+#   git config sync-mirrors.remotes "origin forgejo"
+# Any other remote (upstream, a person's fork, another project) is never
+# fetched, compared or pushed.  Push aliases (a remote with more than one push
+# URL, such as `all`) are skipped too.  A repo with fewer than two mirrors has
+# nothing to sync and is left alone.
+#
+# BRANCH defaults to the branch origin/HEAD names, else a bare repo's HEAD,
+# else main.
 #
 # If the tips of BRANCH have truly diverged (no single tip contains the
 # others), nothing is pushed: that needs a merge by hand.
+#
+# The local BRANCH is fast-forwarded too, in whichever worktree has it checked
+# out, so this works from a bare repo or any of its linked worktrees.
 #
 # Branches on a mirror that are already merged into BRANCH are listed; with
 # --prune they are deleted from that mirror.  A branch sitting exactly at the
 # tip of BRANCH is never counted as merged; it may be new work.
 #
-# The local BRANCH is fast-forwarded too, in whichever worktree has it checked
-# out, so this works from a bare repo or any of its linked worktrees.
-#
-#   -n        dry run: fetch and report, change nothing
-#   --prune   delete merged branches from the mirrors
+#   -n            dry run: fetch and report, change nothing
+#   --prune       delete merged branches from the mirrors
+#   --no-publish  push only commits some mirror already has; local commits on
+#                 no mirror are reported, not pushed.  For sweeps over many
+#                 repos.
 
 set -uo pipefail
 
 dry_run=false
 prune=false
-branch=main
+publish=true
+branch=
 while (($#)); do
     case "$1" in
         -n|--dry-run) dry_run=true ;;
         --prune)      prune=true ;;
+        --no-publish) publish=false ;;
         -h|--help)    sed -n '2,/^$/s/^# \{0,1\}//p' "$0"; exit 0 ;;
         -*)           echo "sync-mirrors: unknown option $1" >&2; exit 2 ;;
         *)            branch="$1" ;;
@@ -42,13 +56,19 @@ run() {
     if $dry_run; then echo "  would run: git $*"; else git "$@"; fi
 }
 
+names=$(git config --get sync-mirrors.remotes || echo "origin github mimir ceridwen bbgithub")
 mirrors=()
 for r in $(git remote); do
-    [[ $r == upstream ]] && continue
+    [[ " $names " == *" $r "* ]] || continue
     n=$(git config --get-all "remote.$r.pushurl" | wc -l)
     ((n > 1)) && continue
     mirrors+=("$r")
 done
+
+if ((${#mirrors[@]} < 2)); then
+    echo "fewer than two mirrors (${mirrors[*]:-none}); nothing to sync"
+    exit 0
+fi
 
 reachable=()
 unreachable=()
@@ -68,17 +88,38 @@ if ((${#reachable[@]} == 0)); then
     exit 1
 fi
 
-# Candidate tips: the local branch and each reachable mirror's copy of it.
+if [[ -z $branch ]]; then
+    branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)
+    branch=${branch#origin/}
+    if [[ -z $branch && $(git rev-parse --is-bare-repository) == true ]]; then
+        branch=$(git symbolic-ref --quiet --short HEAD)
+    fi
+    branch=${branch:-main}
+fi
+
+# Candidate tips: each reachable mirror's copy of the branch, and the local
+# branch unless only commits already on a mirror may be pushed.
 declare -A tipof
 refs=()
-if git rev-parse --verify --quiet "refs/heads/$branch" >/dev/null; then
-    refs+=("refs/heads/$branch")
+local_ref="refs/heads/$branch"
+has_local=false
+if git rev-parse --verify --quiet "$local_ref" >/dev/null; then
+    has_local=true
+    tipof[$local_ref]=$(git rev-parse "$local_ref")
+    $publish && refs+=("$local_ref")
 fi
 for r in "${reachable[@]}"; do
     ref="refs/remotes/$r/$branch"
-    git rev-parse --verify --quiet "$ref" >/dev/null && refs+=("$ref")
+    if git rev-parse --verify --quiet "$ref" >/dev/null; then
+        refs+=("$ref")
+        tipof[$ref]=$(git rev-parse "$ref")
+    fi
 done
-for ref in "${refs[@]}"; do tipof[$ref]=$(git rev-parse "$ref"); done
+
+if ((${#refs[@]} == 0)); then
+    echo "no $branch on any reachable mirror; nothing to sync"
+    exit 0
+fi
 
 # The newest tip is one that every other candidate is an ancestor of.
 tip=
@@ -111,27 +152,35 @@ for r in "${reachable[@]}"; do
     fi
 done
 
-# Local branch: fast-forward it too.
-local_ref="refs/heads/$branch"
-if [[ ${tipof[$local_ref]:-} != "$tip" ]] && git rev-parse --verify --quiet "$local_ref" >/dev/null; then
-    # The worktree that has the branch checked out, if any.  Moving the ref
-    # under it with update-ref would leave its files out of step.
-    wt=$(git worktree list --porcelain |
-         awk -v want="branch $local_ref" '/^worktree /{w=substr($0,10)} $0==want{print w; exit}')
-    if [[ -n $wt ]]; then
-        echo "local $branch: behind, fast-forwarding in $wt"
-        # A git alias runs with GIT_DIR (and maybe GIT_WORK_TREE) exported for
-        # the repo it was started in; left set, they would point this merge
-        # at the caller's git dir rather than $wt's.
-        if $dry_run; then
-            echo "  would run: git -C $wt merge --ff-only $tip"
+# Local branch.  Without --no-publish it is one of the candidates, so it is
+# either the tip or behind it; with it, it may also be ahead or diverged.
+if $has_local && [[ ${tipof[$local_ref]} != "$tip" ]]; then
+    lsha=${tipof[$local_ref]}
+    if git merge-base --is-ancestor "$lsha" "$tip"; then
+        # The worktree that has the branch checked out, if any.  Moving the
+        # ref under it with update-ref would leave its files out of step.
+        wt=$(git worktree list --porcelain |
+             awk -v want="branch $local_ref" '/^worktree /{w=substr($0,10)} $0==want{print w; exit}')
+        if [[ -n $wt ]]; then
+            echo "local $branch: behind, fast-forwarding in $wt"
+            # A git alias runs with GIT_DIR (and maybe GIT_WORK_TREE) exported
+            # for the repo it was started in; left set, they would point this
+            # merge at the caller's git dir rather than $wt's.
+            if $dry_run; then
+                echo "  would run: git -C $wt merge --ff-only $tip"
+            else
+                (unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_COMMON_DIR GIT_PREFIX
+                 git -C "$wt" merge --ff-only --quiet "$tip") || status=1
+            fi
         else
-            (unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_COMMON_DIR GIT_PREFIX
-             git -C "$wt" merge --ff-only --quiet "$tip") || status=1
+            echo "local $branch: behind, updating"
+            run update-ref "$local_ref" "$tip" "$lsha" || status=1
         fi
+    elif git merge-base --is-ancestor "$tip" "$lsha"; then
+        echo "local $branch: $(git rev-list --count "$tip..$lsha") commit(s) on no mirror; not published (--no-publish)"
     else
-        echo "local $branch: behind, updating"
-        run update-ref "$local_ref" "$tip" "${tipof[$local_ref]}" || status=1
+        echo "local $branch: diverged from the mirrors; left alone"
+        status=1
     fi
 fi
 
