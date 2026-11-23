@@ -2,8 +2,9 @@
 # git sync-mirrors [-n] [--prune] [BRANCH]
 #
 # Bring every reachable mirror of this repo up to the newest BRANCH (default
-# main), fast-forward only.  Mirrors are all remotes except push aliases (a
-# remote with more than one push URL, such as `all`).  An unreachable mirror is
+# main), fast-forward only.  Mirrors are all remotes except `upstream` (the
+# source of a fork, not a copy of it) and push aliases (a remote with more than
+# one push URL, such as `all`).  An unreachable mirror is
 # skipped and reported as possibly behind; it is not counted as synced.
 #
 # If the tips of BRANCH have truly diverged (no single tip contains the
@@ -12,6 +13,9 @@
 # Branches on a mirror that are already merged into BRANCH are listed; with
 # --prune they are deleted from that mirror.  A branch sitting exactly at the
 # tip of BRANCH is never counted as merged; it may be new work.
+#
+# The local BRANCH is fast-forwarded too, in whichever worktree has it checked
+# out, so this works from a bare repo or any of its linked worktrees.
 #
 #   -n        dry run: fetch and report, change nothing
 #   --prune   delete merged branches from the mirrors
@@ -40,6 +44,7 @@ run() {
 
 mirrors=()
 for r in $(git remote); do
+    [[ $r == upstream ]] && continue
     n=$(git config --get-all "remote.$r.pushurl" | wc -l)
     ((n > 1)) && continue
     mirrors+=("$r")
@@ -109,9 +114,21 @@ done
 # Local branch: fast-forward it too.
 local_ref="refs/heads/$branch"
 if [[ ${tipof[$local_ref]:-} != "$tip" ]] && git rev-parse --verify --quiet "$local_ref" >/dev/null; then
-    if [[ $(git symbolic-ref --quiet HEAD) == "$local_ref" ]]; then
-        echo "local $branch: behind, fast-forwarding"
-        run merge --ff-only --quiet "$tip" || status=1
+    # The worktree that has the branch checked out, if any.  Moving the ref
+    # under it with update-ref would leave its files out of step.
+    wt=$(git worktree list --porcelain |
+         awk -v want="branch $local_ref" '/^worktree /{w=substr($0,10)} $0==want{print w; exit}')
+    if [[ -n $wt ]]; then
+        echo "local $branch: behind, fast-forwarding in $wt"
+        # A git alias runs with GIT_DIR (and maybe GIT_WORK_TREE) exported for
+        # the repo it was started in; left set, they would point this merge
+        # at the caller's git dir rather than $wt's.
+        if $dry_run; then
+            echo "  would run: git -C $wt merge --ff-only $tip"
+        else
+            (unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_COMMON_DIR GIT_PREFIX
+             git -C "$wt" merge --ff-only --quiet "$tip") || status=1
+        fi
     else
         echo "local $branch: behind, updating"
         run update-ref "$local_ref" "$tip" "${tipof[$local_ref]}" || status=1
