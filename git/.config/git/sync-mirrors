@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+# git sync-mirrors [-n] [--prune] [BRANCH]
+#
+# Bring every reachable mirror of this repo up to the newest BRANCH (default
+# main), fast-forward only.  Mirrors are all remotes except push aliases (a
+# remote with more than one push URL, such as `all`).  An unreachable mirror is
+# skipped and reported as possibly behind; it is not counted as synced.
+#
+# If the tips of BRANCH have truly diverged (no single tip contains the
+# others), nothing is pushed: that needs a merge by hand.
+#
+# Branches on a mirror that are already merged into BRANCH are listed; with
+# --prune they are deleted from that mirror.  A branch sitting exactly at the
+# tip of BRANCH is never counted as merged; it may be new work.
+#
+#   -n        dry run: fetch and report, change nothing
+#   --prune   delete merged branches from the mirrors
+
+set -uo pipefail
+
+dry_run=false
+prune=false
+branch=main
+while (($#)); do
+    case "$1" in
+        -n|--dry-run) dry_run=true ;;
+        --prune)      prune=true ;;
+        -h|--help)    sed -n '2,/^$/s/^# \{0,1\}//p' "$0"; exit 0 ;;
+        -*)           echo "sync-mirrors: unknown option $1" >&2; exit 2 ;;
+        *)            branch="$1" ;;
+    esac
+    shift
+done
+
+export GIT_TERMINAL_PROMPT=0
+
+run() {
+    if $dry_run; then echo "  would run: git $*"; else git "$@"; fi
+}
+
+mirrors=()
+for r in $(git remote); do
+    n=$(git config --get-all "remote.$r.pushurl" | wc -l)
+    ((n > 1)) && continue
+    mirrors+=("$r")
+done
+
+reachable=()
+unreachable=()
+declare -A why
+for r in "${mirrors[@]}"; do
+    if err=$(timeout 30 git fetch --prune --quiet "$r" 2>&1); then
+        reachable+=("$r")
+    else
+        unreachable+=("$r")
+        why[$r]=$(printf '%s\n' "$err" | grep -m1 . || echo "fetch timed out")
+    fi
+done
+
+if ((${#reachable[@]} == 0)); then
+    echo "sync-mirrors: no mirror reachable" >&2
+    for r in "${unreachable[@]}"; do echo "  $r: ${why[$r]}" >&2; done
+    exit 1
+fi
+
+# Candidate tips: the local branch and each reachable mirror's copy of it.
+declare -A tipof
+refs=()
+if git rev-parse --verify --quiet "refs/heads/$branch" >/dev/null; then
+    refs+=("refs/heads/$branch")
+fi
+for r in "${reachable[@]}"; do
+    ref="refs/remotes/$r/$branch"
+    git rev-parse --verify --quiet "$ref" >/dev/null && refs+=("$ref")
+done
+for ref in "${refs[@]}"; do tipof[$ref]=$(git rev-parse "$ref"); done
+
+# The newest tip is one that every other candidate is an ancestor of.
+tip=
+for a in "${refs[@]}"; do
+    ok=true
+    for b in "${refs[@]}"; do
+        git merge-base --is-ancestor "${tipof[$b]}" "${tipof[$a]}" || { ok=false; break; }
+    done
+    if $ok; then tip=${tipof[$a]}; break; fi
+done
+
+if [[ -z $tip ]]; then
+    echo "sync-mirrors: $branch has diverged; merge by hand. Tips:" >&2
+    for ref in "${refs[@]}"; do
+        printf '  %-32s %s\n' "$ref" "$(git log -1 --format='%h %cs %s' "$ref")" >&2
+    done
+    exit 1
+fi
+
+echo "$branch -> $(git log -1 --format='%h %s' "$tip")"
+status=0
+
+for r in "${reachable[@]}"; do
+    ref="refs/remotes/$r/$branch"
+    if [[ ${tipof[$ref]:-} == "$tip" ]]; then
+        echo "$r: up to date"
+    else
+        echo "$r: behind, pushing"
+        run push --quiet "$r" "$tip:refs/heads/$branch" || status=1
+    fi
+done
+
+# Local branch: fast-forward it too.
+local_ref="refs/heads/$branch"
+if [[ ${tipof[$local_ref]:-} != "$tip" ]] && git rev-parse --verify --quiet "$local_ref" >/dev/null; then
+    if [[ $(git symbolic-ref --quiet HEAD) == "$local_ref" ]]; then
+        echo "local $branch: behind, fast-forwarding"
+        run merge --ff-only --quiet "$tip" || status=1
+    else
+        echo "local $branch: behind, updating"
+        run update-ref "$local_ref" "$tip" "${tipof[$local_ref]}" || status=1
+    fi
+fi
+
+for r in "${reachable[@]}"; do
+    merged=()
+    while read -r ref; do
+        name=${ref#refs/remotes/$r/}
+        [[ $name == "$branch" || $name == HEAD ]] && continue
+        sha=$(git rev-parse "$ref")
+        [[ $sha == "$tip" ]] && continue
+        git merge-base --is-ancestor "$sha" "$tip" && merged+=("$name")
+    done < <(git for-each-ref --format='%(refname)' "refs/remotes/$r/")
+    ((${#merged[@]})) || continue
+    if $prune; then
+        echo "$r: deleting merged branches: ${merged[*]}"
+        run push --quiet "$r" --delete "${merged[@]}" || status=1
+    else
+        echo "$r: merged into $branch (--prune to delete): ${merged[*]}"
+    fi
+done
+
+for r in "${unreachable[@]}"; do
+    echo "$r: UNREACHABLE, may be behind (${why[$r]})"
+done
+((${#unreachable[@]})) && status=1
+
+exit $status
