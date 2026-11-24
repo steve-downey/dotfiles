@@ -25,7 +25,6 @@
 	helper = cache
 [alias]
 	pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
-	sync-mirrors = !~/.config/git/sync-mirrors
 [github]
 	user = steve-downey
 [url "ssh://git@github.com/steve-downey/"]
