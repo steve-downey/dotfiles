@@ -137,7 +137,13 @@ _venv_auto() {
     dir=${dir:h}
   done
   if [[ -n $_VENV_AUTO && ${VIRTUAL_ENV:A} == $_VENV_AUTO && $venv != $_VENV_AUTO ]]; then
+    # Don't let deactivate restore _OLD_VIRTUAL_PATH: that snapshot predates
+    # every PATH edit made since activation (the rest of .zshrc, nvm use, ...).
+    # Drop only the venv's own bin from the PATH as it stands now.
+    local -a keep=(${path:#${VIRTUAL_ENV}/bin})
+    keep=(${keep:#${_VENV_AUTO}/bin})
     (( $+functions[deactivate] )) && deactivate
+    path=($keep)
     unset _VENV_AUTO
   fi
   if [[ -n $venv && -z $VIRTUAL_ENV ]]; then
@@ -146,7 +152,7 @@ _venv_auto() {
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook chpwd _venv_auto
-_venv_auto
+# The initial _venv_auto call is at the end of this file, after every PATH edit.
 
 # GO installation
 export PATH=$PATH:/usr/local/go/bin:~/go/bin
@@ -154,17 +160,6 @@ export PATH=$PATH:/usr/local/go/bin:~/go/bin
 # VCPKG
 export VCPKG_ROOT=~/bld/vcpkg/master
 export PATH=$VCPKG_ROOT:$PATH
-
-# Last so these are first in PATH
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private .local/bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
 
 [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
     source "$EAT_SHELL_INTEGRATION_DIR/zsh"
@@ -195,3 +190,24 @@ if [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/host" ]]; then
 fi
 
 export BROWSER="$HOME/.local/bin/xdg-open"
+
+# emacs vterm
+if [[ "$INSIDE_EMACS" = 'vterm' ]] \
+       && [[ -f "${EMACS_VTERM_PATH}/etc/emacs-vterm-zsh.sh" ]]; then
+    source "${EMACS_VTERM_PATH}/etc/emacs-vterm-zsh.sh"
+fi
+
+# Last so these are first in PATH
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private .local/bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Activate a project .venv for a shell started inside one. Last, so the venv's
+# bin leads PATH just as it does after a cd into the project.
+_venv_auto
