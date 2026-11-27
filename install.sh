@@ -44,7 +44,7 @@ is_skipped() {
 # Directories that other tools also write into must exist as real
 # directories before stowing, or stow folds them into a single symlink
 # into this repo and everything installed there lands in the checkout.
-$DRY_RUN || mkdir -p "$HOME/.local/bin"
+$DRY_RUN || mkdir -p "$HOME/.local/bin" "$HOME/.claude/skills"
 
 stow_args=(--verbose --target "$HOME" --restow --dir "$DOTFILES_DIR")
 $DRY_RUN && stow_args+=(--simulate)

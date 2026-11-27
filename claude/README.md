@@ -9,20 +9,23 @@ Contents:
 
 - `.claude/CLAUDE.md` — user-global instructions, loaded every session
   in every project.
-- `.claude/skills/` — user-invocable skills. The whole directory is
-  stow-folded, so skills added on any machine land in the repo working
-  tree; `git add` to keep them.
-- Each skill in `.claude/skills/` is a *relative* symlink written for the
-  **stowed** location, i.e. relative to `~/.claude/skills/`, so the form is
-  `../../src/<name>/main`. Each skill lives in its own repo; clone it to
-  `~/src/<name>/main` on each machine, and until then the link dangles,
-  harmlessly. Currently: `voice`
+- `.claude/skills/` — user-invocable skills, each a symlink to its own
+  repo. Stow links them **one by one** into `~/.claude/skills/`, which
+  must stay a real directory: it also holds machine-local skills
+  (`humanizer`, `unslop-text`) and Claude Code's own `synced/`, none of
+  which belong here. `install.sh` creates it before stowing so stow
+  cannot fold it into a link back into this repo.
+- Each skill link is relative **to where it lives in this repo**,
+  `claude/.claude/skills/`, because a symlink always resolves from its
+  real location, however it is reached. So the form is
+  `../../../../../src/<name>/main`, which assumes this repo is at
+  `~/src/dotfiles`. Clone each skill to `~/src/<name>/main`; until then
+  the link dangles, harmlessly. Currently: `voice`
   (`github.com:steve-downey/voice`), `cpp-house-style`, `plan-fanout`.
 
-  These were previously written as `../../../../<name>/main`, which resolves
-  to `/` + `<name>/main` from the stowed location and to
-  `~/src/ceridwen/<name>/main` from inside this tree — dangling in both.
-  Corrected 2026-09-04.
+  Earlier forms, both dangling: `../../../../<name>/main` (before
+  2026-09-04), and `../../src/<name>/main`, written for the stowed
+  location (until 2026-11-26).
 
 Integration on a new machine: if `~/.claude/CLAUDE.md` or
 `~/.claude/skills` already exist there, merge anything worth keeping
