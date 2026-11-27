@@ -5,6 +5,7 @@
 # Packages skipped until their internal paths are corrected:
 #   fontconfig  - needs .config/fontconfig/ wrapper (currently bare fonts.conf)
 #   ghostty     - needs .config/ghostty/ wrapper (currently bare config/themes/)
+#   tmux-powerline - needs .config/ wrapper (currently stows to ~/tmux-powerline)
 #   uv          - contains a tool receipt, not a config file
 
 set -euo pipefail
@@ -22,12 +23,13 @@ if ! command -v stow >/dev/null 2>&1; then
 fi
 
 # Packages with structural issues that would create wrong paths in ~/
-SKIP_PACKAGES=(fontconfig ghostty uv)
+SKIP_PACKAGES=(fontconfig ghostty tmux-powerline uv)
 
 skip_reason() {
     case "$1" in
         fontconfig) echo "needs .config/fontconfig/ wrapper" ;;
         ghostty)    echo "needs .config/ghostty/ wrapper" ;;
+        tmux-powerline) echo "needs .config/ wrapper" ;;
         uv)         echo "contains tool receipt, not config" ;;
         *)          echo "unknown" ;;
     esac
